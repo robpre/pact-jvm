@@ -2,6 +2,7 @@ package au.com.dius.pact.provider.junit5;
 
 import au.com.dius.pact.core.model.Interaction;
 import au.com.dius.pact.core.model.Pact;
+import au.com.dius.pact.provider.MessageAndMetadata;
 import au.com.dius.pact.provider.PactVerifyProvider;
 import au.com.dius.pact.provider.junitsupport.Provider;
 import au.com.dius.pact.provider.junitsupport.State;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 @Provider("AmqpProvider")
 @PactFolder("src/test/resources/amqp_pacts")
@@ -42,5 +45,10 @@ class AmqpContractTest {
   @PactVerifyProvider("a V4 test message")
   public String verifyV4MessageForOrder() {
     return "{\"testParam1\": \"value1\",\"testParam2\": \"value2\"}";
+  }
+
+  @PactVerifyProvider("a V4 test message with metadata")
+  public MessageAndMetadata verifyV4MessageWithMetadataForOrder() {
+    return new MessageAndMetadata("{\"testParam1\": \"value1\",\"testParam2\": \"value2\"}".getBytes(), Map.of("someKey", "different string pact but same type"));
   }
 }

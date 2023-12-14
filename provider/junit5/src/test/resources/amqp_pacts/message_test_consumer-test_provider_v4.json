@@ -18,6 +18,32 @@
             "providerState": "SomeProviderState",
             "pending": false,
             "type": "Asynchronous/Messages"
+        },
+        {
+            "description": "a V4 test message with metadata",
+            "metadata": {
+                "contentType": "application/json",
+                "someKey": "somestring"
+            },
+            "contents": {
+                "testParam1": "value1",
+                "testParam2": "value2"
+            },
+            "matchingRules": {
+                "metadata": {
+                    "somestring": {
+                        "combine": "AND",
+                        "matchers": [
+                            {
+                                "match": "type"
+                            }
+                        ]
+                    }
+                }
+            },
+            "providerState": "SomeProviderState",
+            "pending": false,
+            "type": "Asynchronous/Messages"
         }
     ],
     "metadata": {
